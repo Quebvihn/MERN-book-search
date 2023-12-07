@@ -81,4 +81,3 @@ mutation Mutation($bookId: ID!) {
     }
   }
 `;
-  
