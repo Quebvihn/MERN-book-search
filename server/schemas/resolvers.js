@@ -19,8 +19,8 @@ const resolvers = {
 
   Mutation: {
     // Resolver for creating a user
-    addUser: async (_, { input }) => {
-      const user = await User.create(input);
+    addUser: async (_, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
 
       if (!user) {
         throw new Error('Failed to create user');
@@ -31,9 +31,9 @@ const resolvers = {
     },
 
     // Resolver for user login
-    login: async (_, { input }) => {
+    login: async (_, { username, password }) => {
       const user = await User.findOne({
-        $or: [{ username: input.username }, { email: input.email }],
+        $or: [{ username: username }, { password: password }],
       });
 
       if (!user) {
